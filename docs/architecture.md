@@ -1,130 +1,208 @@
-# 🪖 AnkArmy — Architecture du projet
+# Architecture
 
-## 🎯 Vision du projet
-
-AnkArmy transforme Anki en un jeu de progression militaire.
-
-L’utilisateur commence comme **soldat simple** et progresse dans les grades en fonction de sa régularité et de ses performances de révision.
-
-Chaque carte Anki devient un **ordre militaire** à exécuter.
+Version : 0.1
+Statut : En cours de conception
 
 ---
 
-## 🧩 Concept central
+# 1. Objectif
 
-### 🔁 Boucle de gameplay
-1. Réviser des cartes Anki
-2. Réussir / échouer des réponses
-3. Gagner de l’expérience (XP)
-4. Monter en grade
-5. Débloquer de nouveaux rôles / missions
+Définir l’architecture technique d’AnkArmy afin de transformer le Game Design Document en système fonctionnel dans Anki.
 
----
+Ce document sert de pont entre :
 
-## 🪖 Système de progression
-
-| Grade | Rôle | Débloque |
-|------|------|----------|
-| Recrue | Débutant | Missions simples |
-| Soldat | Utilisateur actif | Streak bonus |
-| Caporal | Régularité | Missions quotidiennes |
-| Sergent | Discipline | Défis chronométrés |
-| Lieutenant | Maîtrise | Missions stratégiques |
-| Capitaine | Haut niveau | Gestion de “unités de cartes” |
+* le design du jeu ;
+* le code de l’addon ;
+* le moteur Anki.
 
 ---
 
-## ⚙️ Architecture technique
+# 2. Philosophie technique
 
-### 📁 Structure du projet
-AnkArmy/
-│
-├── manifest.json
-├── main.py
-├── config.py
-│
-├── core/
-│ ├── xp_system.py
-│ ├── rank_system.py
-│ ├── missions.py
-│ ├── stats_tracker.py
-│
-├── ui/
-│ ├── dashboard.py
-│ ├── overlays.py
-│
-├── hooks/
-│ ├── on_card_review.py
-│ ├── on_deck_complete.py
-│
-├── data/
-│ ├── player.json
-│ ├── progress.json
-│
-├── assets/
-│ ├── icons/
-│ ├── sounds/
-│
-└── docs/
-├── architecture.md
-├── README.md
+L’architecture doit respecter quatre principes :
+
+* compatibilité totale avec Anki ;
+* simplicité de maintenance ;
+* modularité forte ;
+* absence de dépendances externes inutiles.
 
 ---
 
-## 🧠 Logique du système
+# 3. Vue d’ensemble
 
-### 📌 1. Hooks Anki
-Le plugin écoute :
-- réponse carte
-- réussite/échec
-- temps de réponse
+AnkArmy est composé de 5 modules principaux :
 
-👉 déclenche XP + events
-
----
-
-### 📌 2. XP System
-- bonne réponse → +XP
-- mauvaise réponse → peu ou pas XP
-- série → bonus multiplicateur
+```text id="a1x9dd"
+Anki Addon Core
+        │
+        ├── Game Engine
+        ├── Mission System
+        ├── Progression System
+        ├── Save System
+        └── Terminal UI
+```
 
 ---
 
-### 📌 3. Rank System
-- seuils d’XP définissent les grades
-- chaque grade débloque des mécaniques
+# 4. Intégration avec Anki
+
+Le système s’intègre via :
+
+* hooks Anki (révisions, réponses, sessions) ;
+* API interne d’Anki ;
+* interception des événements de carte.
 
 ---
 
-### 📌 4. Missions
-Exemples :
-- “Réviser 20 cartes sans erreur”
-- “3 jours de streak”
-- “Deck complet en mode rapide”
+# 5. Modules principaux
 
 ---
 
-## 🎮 Boucle de motivation
+## 5.1 Game Engine
 
-Le système doit toujours répondre à 3 besoins :
+Cœur logique du système.
 
-- 📈 progression visible
-- 🎯 objectifs courts
-- 🪖 immersion (ordre militaire, hiérarchie)
+Responsable de :
 
----
+* calcul XP ;
+* gestion discipline ;
+* validation des missions ;
+* déclenchement des promotions.
 
-## ⚠️ Contraintes importantes
-
-- ne jamais bloquer Anki (plugin léger)
-- sauvegarde locale obligatoire
-- pas de dépendance serveur au début
+Aucune logique métier ne doit exister en dehors de ce module.
 
 ---
 
-## 🚀 Étapes futures
+## 5.2 Mission System
 
-- UI type “table de commandement”
-- missions dynamiques
-- système d’unités (groupes de cartes)
-- ranking global optionnel
+Responsable de :
+
+* génération des missions ;
+* adaptation selon discipline ;
+* définition des objectifs ;
+* validation des résultats.
+
+---
+
+## 5.3 Progression System
+
+Responsable de :
+
+* gestion des grades ;
+* calcul de l’évolution carrière ;
+* déblocages.
+
+---
+
+## 5.4 Save System
+
+Responsable de :
+
+* stockage local ;
+* chargement des données ;
+* versionnement ;
+* récupération des erreurs.
+
+---
+
+## 5.5 Terminal UI
+
+Responsable de :
+
+* affichage des missions ;
+* rapports ;
+* messages du Commandement ;
+* promotions.
+
+Aucune logique métier.
+
+---
+
+# 6. Flux de données
+
+```text id="b2x8ff"
+Anki Event (card review)
+        │
+        ▼
+Game Engine analyse
+        │
+        ▼
+Mission System met à jour l’état
+        │
+        ▼
+Progression System calcule XP / grade
+        │
+        ▼
+Save System enregistre
+        │
+        ▼
+Terminal UI affiche le résultat
+```
+
+---
+
+# 7. Hooks Anki
+
+Le système repose sur des événements :
+
+* début de session ;
+* réponse à une carte ;
+* fin de session ;
+* fermeture d’Anki.
+
+Chaque événement déclenche une mise à jour du Game Engine.
+
+---
+
+# 8. Gestion des états
+
+Le système fonctionne avec un état global :
+
+```json id="c3l9aa"
+{
+  "player_state": {},
+  "mission_state": {},
+  "session_state": {},
+  "global_stats": {}
+}
+```
+
+Cet état est la seule source de vérité.
+
+---
+
+# 9. Règle d’or
+
+Aucune logique métier ne doit être dispersée dans l’interface ou les hooks.
+
+Tout doit passer par le Game Engine.
+
+---
+
+# 10. Extensibilité
+
+Le système est conçu pour permettre :
+
+* ajout de nouvelles missions ;
+* nouveaux grades ;
+* nouveaux systèmes de récompenses ;
+* évolution sans casser les sauvegardes.
+
+---
+
+# 11. Contraintes Anki
+
+Le système doit :
+
+* être rapide (< 50ms traitement) ;
+* ne jamais bloquer une révision ;
+* fonctionner offline ;
+* rester léger en mémoire.
+
+---
+
+# 12. Règle fondamentale
+
+AnkArmy doit toujours être perçu comme une couche invisible au-dessus d’Anki.
+
+Anki reste l’outil principal. AnkArmy est un système de lecture et de progression.

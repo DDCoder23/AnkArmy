@@ -1,6 +1,6 @@
-from state import load_state, save_state
-from mission import generate_mission
-from terminal import show
+from .state import load_state, save_state
+from .mission import generate_mission
+from .terminal import show
 
 
 class Engine:

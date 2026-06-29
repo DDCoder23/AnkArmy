@@ -12,10 +12,15 @@ def load_state():
             "cards_correct": 0,
             "cards_wrong": 0
         }
+    try:
+        with open(SAVE_PATH, "r") as f:
+            return json.load(f)
 
-    with open(SAVE_PATH, "r") as f:
-        return json.load(f)
+    except:
+        save_state(DEFAULT_STATE)
+        return DEFAULT_STATE.copy()
 
+    
 
 def save_state(state):
     os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)

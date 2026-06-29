@@ -1,7 +1,13 @@
 from .state import load_state, save_state
 from .mission import generate_mission
-from .terminal import show
+from .terminal import show_header, show_mission, show_status, show_footer
 
+
+def end_session(self):
+    
+    save_state(self.state)
+
+    
 
 class Engine:
     def __init__(self):
@@ -14,7 +20,10 @@ class Engine:
         self.state["cards_wrong"] = 0
 
         self.mission = generate_mission(self.state)
-        show(f"MISSION:\n{self.mission['objective']}")
+        show_header()
+        show_mission(self.mission)
+        show_status(self.state)
+        show_footer()
 
     # CARD RESULT
     def review_card(self, correct: bool):
@@ -39,10 +48,10 @@ class Engine:
         if self.state["cards_wrong"] == 0:
             self.state["discipline"] += 2
 
-        show(
-            f"SESSION TERMINÉE\n"
-            f"XP gagné: {xp_gain}\n"
-            f"Discipline: {self.state['discipline']}"
-        )
+        show_header()
+        print("📦 SESSION TERMINÉE")
+        show_status(self.state)
+        show_footer()
+
 
         save_state(self.state)

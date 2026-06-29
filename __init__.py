@@ -4,19 +4,31 @@ from .engine import Engine
 engine = Engine()
 
 
-def on_session_start():
+    
+
+
+def on_answer(*args, **kwargs):
+    reviewer, card, ease = args
+
+    print("CARD:", card)
+    print("EASE:", ease)
+
+    correct = ease >= 3
+    engine.review_card(correct)
+    
+    
+
+
+def on_reviewer_init(reviewer):
+    print("REVIEWER STARTED")
     engine.start_session()
 
 
-def on_card_answer(reviewer, card, ease):
-    correct = ease > 1
-    engine.review_card(correct)
-
-
-def on_session_end():
+def on_reviewer_end():
+    print("REVIEWER END")
     engine.end_session()
 
 
-gui_hooks.session_will_start.append(on_session_start)
-gui_hooks.reviewer_did_answer_card.append(on_card_answer)
-gui_hooks.session_will_end.append(on_session_end)
+gui_hooks.reviewer_did_init.append(on_reviewer_init)
+gui_hooks.reviewer_did_answer_card.append(on_answer)
+gui_hooks.reviewer_will_end.append(on_reviewer_end)

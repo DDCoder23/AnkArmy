@@ -10,8 +10,10 @@ class Engine:
 
     # START SESSION
     def start_session(self):
-        self.mission = generate_mission(self.state)
+        self.state["cards_correct"] = 0
+        self.state["cards_wrong"] = 0
 
+        self.mission = generate_mission(self.state)
         show(f"MISSION:\n{self.mission['objective']}")
 
     # CARD RESULT
@@ -23,11 +25,15 @@ class Engine:
             self.state["discipline"] -= 1
             self.state["cards_wrong"] += 1
 
+        save_state(self.state)   # 🔥 IMPORTANT
+
     # END SESSION
     def end_session(self):
-        xp_gain = self.state["cards_correct"]
+        xp_gain=self.state["cards_correct"]
+        self.state["xp"]+=xp_gain
+        
 
-        self.state["xp"] += xp_gain
+        
 
         # discipline simple
         if self.state["cards_wrong"] == 0:

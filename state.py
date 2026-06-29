@@ -2,16 +2,16 @@ import json
 import os
 
 SAVE_PATH = os.path.join(os.path.dirname(__file__), "data", "save.json")
-
+DEFAULT_STATE = {
+    "xp": 0,
+    "discipline": 100,
+    "cards_correct": 0,
+    "cards_wrong": 0
+}
 
 def load_state():
     if not os.path.exists(SAVE_PATH):
-        return {
-            "xp": 0,
-            "discipline": 100,
-            "cards_correct": 0,
-            "cards_wrong": 0
-        }
+        return DEFAULT_STATE.copy()
     try:
         with open(SAVE_PATH, "r") as f:
             return json.load(f)

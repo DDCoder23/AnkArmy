@@ -19,6 +19,7 @@ class Engine:
         if self.session_active:
             return
         self.session_active = True
+        print(self.session_active)
         self.player.reset_session()
         self.player.current_mission = generate_mission(self.player)
         self.player.total_mission+=1
@@ -42,6 +43,7 @@ class Engine:
         if not self.session_active:
             return
         self.session_active = False
+        print(self.session_active)
         
         mission = self.player.current_mission
         xp_gain = self.player.cards_correct

@@ -8,5 +8,5 @@ def generate_mission(player):
 
     return {
         "objective": f"Réviser {base} cartes",
-        "target_cards": base
+        "target": base
     }

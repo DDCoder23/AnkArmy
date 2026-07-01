@@ -101,7 +101,7 @@ def show_boot(player):
      username = mw.pm.name
      bar = render_progress_bar(
         player.xp,
-        get_next_grade(player.grade.name.name).xp_required
+        get_next_grade(player.grade.name).xp_required
     ) 
      discipline="STABLE" if player.discipline >= 75 else "WARNING"
      content = f"""

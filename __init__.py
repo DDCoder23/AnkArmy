@@ -29,7 +29,7 @@ def on_end_session(*args, **kwargs):
     print("REVIEWER END")
     
     engine.end_session()
-    engine.current_mission = None
+    
 
 
 def on_profile_open(*args, **kwargs):

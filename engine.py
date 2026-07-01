@@ -14,6 +14,7 @@ class Engine:
         self.active_deck = None
         self.locked_deck_id = None
         self._starting = False
+        self.current_mission={}
 
 
     
@@ -50,15 +51,7 @@ class Engine:
 
         print("🟢 SESSION STARTED")
         print(f"📦 Deck locked: {self.locked_deck_id}")
-        
-
-
-        
-        
-
-        
-
-        show_session(self.player,self.player.current_mission)
+  
 
     
     def check_deck_integrity(self):
@@ -90,7 +83,7 @@ class Engine:
         self.session_active = False
         print(self.session_active)
         
-        mission = self.player.current_mission
+        mission = self.current_mission
         xp_gain = self.player.cards_correct
         self.player.add_xp(xp_gain)
         if self.player.mission_completed and  self.player.cards_wrong == 0 :
@@ -108,7 +101,7 @@ class Engine:
 
         save_player(self.player)
     def check_mission_progress(self):
-        mission = self.player.current_mission
+        mission = self.current_mission
 
         if self.player.cards_correct >= mission["target"]:
             self.player.mission_completed = True

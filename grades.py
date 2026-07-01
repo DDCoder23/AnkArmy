@@ -8,7 +8,7 @@ class Grade:
 
     def __repr__(self):
         return f"Grade(name='{self.name}', xp_required={self.xp_required})"
-GRADES = [
+Grades = [
     Grade("Recrue", 0),
     Grade("Aviateur confirmé", 50),
     Grade("Aviateur de 1ère classe", 150),

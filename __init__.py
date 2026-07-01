@@ -32,6 +32,13 @@ def on_end_session(*args, **kwargs):
     engine.current_mission = None
 
 
+def on_profile_open(*args, **kwargs):
+    print("🟢 PROFILE READY → AnkArmy enabled")
+    on_start_session()
+
+gui_hooks.profile_did_open.append(on_profile_open)
+
 gui_hooks.reviewer_did_init.append(on_start_session)
 gui_hooks.reviewer_did_answer_card.append(on_answer)
 gui_hooks.reviewer_will_end.append(on_end_session)
+gui_hooks.profile_did_open.append(on_profile_open)

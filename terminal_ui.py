@@ -45,7 +45,7 @@ class TerminalDialog(QDialog):
         self.setLayout(layout)
 
         # animation (si tu en as une)
-        self.full_text = content
+        
         self.index = 0
 
         

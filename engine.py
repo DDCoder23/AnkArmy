@@ -30,7 +30,7 @@ class Engine:
 
 
         try:
-            self.session_active = True
+            session_active = True
 
             # 📦 reset stats session
             self.player.reset_session()

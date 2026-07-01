@@ -56,7 +56,7 @@ def show_end_session(player):
     session_xp = player.cards_correct
     bar = render_progress_bar(
         player.xp,
-        get_next_grade(player.grade).xp_required
+        get_next_grade(player.grade.name.name).xp_required
     ) 
     
     
@@ -83,7 +83,7 @@ PROGRESSION: {bar}
 
 ------------------------------------
 🪖 STATUT
-Grade: {player.grade}
+Grade: {player.grade.name.name}
 Nombre total de mission : {player.total_mission}
 Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 
@@ -101,7 +101,7 @@ def show_boot(player):
      username = mw.pm.name
      bar = render_progress_bar(
         player.xp,
-        get_next_grade(player.grade).xp_required
+        get_next_grade(player.grade.name.name).xp_required
     ) 
      discipline="STABLE" if player.discipline >= 75 else "WARNING"
      content = f"""
@@ -109,10 +109,10 @@ def show_boot(player):
 Connexion au Commandement...
 Vérification du dossier...
 Accès autorisé.
-Bienvenue, {player.grade}.
+Bienvenue, {player.grade.name.name}.
 STATUS : CONNECTED
 USER   : {username}
-RANK   : {player.grade}
+RANK   : {player.grade.name.name}
 DISCIPLINE  : {discipline}
 ------------------------------------
 📊 STATUS
@@ -147,7 +147,7 @@ Ancien grade :
     {old_grade}
 
 Nouveau grade :
-    {player.grade}
+    {player.grade.name.name}
 
 Votre efficacité a été reconnue
 par le Haut Commandement.
@@ -178,8 +178,8 @@ def render_progress_bar(current: int, total: int, length: int = 20) -> str:
 
 def show_status(player):
     print("\n📊 STATUS")
-    print(f"GRADE: {player.grade.name}")
-    print(f"XP: {player.xp_in_grade}/{player.grade.xp_required}")
+    print(f"GRADE: {player.grade.name.name.name}")
+    print(f"XP: {player.xp_in_grade}/{player.grade.name.name.xp_required}")
 
     
 

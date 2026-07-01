@@ -23,6 +23,7 @@ class TerminalDialog(QDialog):
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.title.setStyleSheet("""
             font-size: 18px;
+            background-color: #101010;
             font-weight: bold;
             color: #00ff66;
             padding: 10px;

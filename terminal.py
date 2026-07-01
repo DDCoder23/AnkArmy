@@ -27,7 +27,7 @@ def show_terminal(title, content):
     dialog = QDialog(mw)
     dialog.setMinimumWidth(650)
     dialog.setMinimumHeight(450)
-    label.setWordWrap(True)
+    
     dialog.setWindowTitle(title)
 
     layout = QVBoxLayout()
@@ -41,6 +41,7 @@ def show_terminal(title, content):
     """)
 
     layout.addWidget(label)
+    label.setWordWrap(True)
     dialog.setLayout(layout)
 
     dialog.exec()

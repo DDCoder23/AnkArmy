@@ -1,5 +1,5 @@
 from aqt.qt import QDialog, QVBoxLayout, QLabel
-
+from aqt import mw
 
 def show_terminal(title, content):
     dialog = QDialog()
@@ -74,7 +74,8 @@ Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
-from aqt import mw
+    show_terminal("AnkArmy", content)
+
 
 def show_boot(player):
      username = mw.pm.name

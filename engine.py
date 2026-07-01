@@ -15,6 +15,8 @@ class Engine:
         self.locked_deck_id = None
         self._starting = False
 
+
+    self.session_active = True
     # START SESSION
     def start_session(self):
         print("REVIEWER STARTED")
@@ -22,7 +24,7 @@ class Engine:
         if self.session_active or self._starting:
             return
         self._starting = True
-        if mw.col is None:
+        if mw.col is None or:
             print("⚠️ Collection not ready yet")
             return
 
@@ -46,9 +48,10 @@ class Engine:
 
             print("🟢 SESSION STARTED")
             print(f"📦 Deck locked: {self.locked_deck_id}")
+        except Exceptions as e:
+           print(e)
 
-        finally:
-            self._starting = False
+
         
         
 

@@ -19,7 +19,7 @@ class TerminalDialog(QDialog):
         self.index = 0
         self.cursor_visible = True
         layout = QVBoxLayout()
-        self.title = QLabel(title_text)
+        self.title = QLabel(title)
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.title.setStyleSheet("""
             font-size: 18px;

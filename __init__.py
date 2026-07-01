@@ -21,21 +21,13 @@ def on_answer(*args, **kwargs):
 
 def on_start_session(*args, **kwargs):
     print("REVIEWER STARTED")
-    global session_started
-
-    if session_started:
-        return
-
-    session_started = True
+  
     engine.start_session()
 
 
 def on_end_session(*args, **kwargs):
     print("REVIEWER END")
-    global session_started
-
-    if not session_started:
-        return
+    
     engine.end_session()
     engine.current_mission = None
 

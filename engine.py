@@ -15,6 +15,7 @@ class Engine:
 
     # START SESSION
     def start_session(self):
+        print(self.session_active)
         if self.session_active:
             return
         self.session_active = True
@@ -37,9 +38,11 @@ class Engine:
 
     # END SESSION
     def end_session(self):
+        print(self.session_active)
         if not self.session_active:
             return
         self.session_active = False
+        
         mission = self.player.current_mission
         xp_gain = self.player.cards_correct
         self.player.add_xp(xp_gain)

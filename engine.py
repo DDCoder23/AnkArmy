@@ -62,7 +62,7 @@ class Engine:
             return
         self.session_active = False
         print(self.session_active)
-        end_session_reward(self.player)
+        end_session_rewards(self.player)
         old=self.player.grade
         if check_promotion(self.player): 
             show_promo(self.player,old)

@@ -1,9 +1,9 @@
 import random
 
-def generate_mission(state):
+def generate_mission(player):
     base = 20
 
-    if state["discipline"] < 80:
+    if player.discipline < 80:
         base -= 5
 
     return {

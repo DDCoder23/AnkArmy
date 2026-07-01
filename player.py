@@ -47,19 +47,21 @@ class Player:
     }
     @classmethod
     def from_dict(cls, data):
-        return cls(
+        player= cls(
         xp=data.get("xp", 0),
         discipline=data.get("discipline", 100),
         cards_correct=data.get("cards_correct", 0),
         cards_wrong=data.get("cards_wrong", 0),
-        player.grade = next(
-        (g for g in GRADES if g.name == data["grade"]),
-        GRADES[0]
-    )
+        
+    
         total_mission=data.get("total des missions", 0),
         mission_réussie=data.get("missions reussies", 0),
         pourcentage_de_réussite=data.get("pourcentage de reussite",0)
-    )
+    ) 
+        player.grade = next(
+        (g for g in GRADES if g.name == data["grade"]),
+        GRADES[0]
+        return player
     def gain_discipline(self, amount):
         self.discipline = min(100, self.discipline + amount)
     def process_result(self, correct: bool):

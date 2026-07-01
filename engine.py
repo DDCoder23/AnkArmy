@@ -51,6 +51,7 @@ class Engine:
 
         print("🟢 SESSION STARTED")
         print(f"📦 Deck locked: {self.locked_deck_id}")
+        self._starting=False
   
 
     

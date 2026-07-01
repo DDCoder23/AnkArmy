@@ -40,6 +40,7 @@ class Engine:
 
     # END SESSION
     def end_session(self):
+        print("REVIEWER END")
         print(self.session_active)
         if not self.session_active:
             return

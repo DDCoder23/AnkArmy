@@ -75,11 +75,12 @@ class Engine:
         else:
             self.player.lose_discipline(1)
         self.player.pourcentage_de_réussite=self.player.mission_réussie//self.player.total_mission
+        save_player(self.player)
         show_end_session(self.player)
         
 
 
-        save_player(self.player)
+        
     def check_mission_progress(self):
         mission = self.current_mission
 

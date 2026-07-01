@@ -9,6 +9,7 @@ from PyQt6.QtMultimedia import QSoundEffect
 from PyQt6.QtCore import QUrl
 import os
 from .grades import get_next_grade
+from .ui.terminal_dialog import TerminalDialog
 _sound = None
 
 def play_sound(filename):
@@ -24,25 +25,7 @@ def play_sound(filename):
     _sound.setVolume(0.8)
     _sound.play()
 def show_terminal(title, content):
-    dialog = QDialog(mw)
-    dialog.setMinimumWidth(650)
-    dialog.setMinimumHeight(450)
-    
-    dialog.setWindowTitle(title)
-
-    layout = QVBoxLayout()
-
-    label = QLabel(content)
-    label.setStyleSheet("""
-        font-family: monospace;
-        background-color: black;
-        color: #00ff00;
-        padding: 10px;
-    """)
-
-    layout.addWidget(label)
-    label.setWordWrap(True)
-    dialog.setLayout(layout)
+    dialog = TerminalDialog(title, content)
 
     dialog.exec()
 def show_session(player, mission):

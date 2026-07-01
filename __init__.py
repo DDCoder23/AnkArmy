@@ -34,7 +34,7 @@ def on_end_session(*args, **kwargs):
 
 def on_profile_open(*args, **kwargs):
     print("🟢 PROFILE READY → AnkArmy enabled")
-    on_start_session()
+    engine.accueil()
 
 def on_state_change(new_state, old_state):
     print(f"STATE: {old_state} -> {new_state}")

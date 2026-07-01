@@ -22,7 +22,7 @@ def show_terminal(title, content):
 def show_session(player, mission):
     content = f"""
 ====================================
-🪖 ANKARMY COMMAND CENTER
+🪖 ANKARMY AIR COMMAND - TERMINAL SYSTEM
 ====================================
 
 📡 MISSION
@@ -74,7 +74,34 @@ Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
+from aqt import mw
 
+def show_boot(player):
+     username = mw.pm.name
+     discipline="STABLE" if player.discipline >= 75 else "WARNING"
+     content = f"""
+====================================
+🪖 ANKARMY AIR COMMAND - TERMINAL SYSTEM
+====================================
+Connexion au Commandement...
+Vérification du dossier...
+Accès autorisé.
+Bienvenue, {player.grade}.
+STATUS : CONNECTED
+USER   : {username}
+RANK   : {player.grade}
+DISCIPLINE  : {discipline}
+------------------------------------
+📊 STATUS
+XP: {player.xp}
+DISCIPLINE: {player.discipline}
+Nombre total de mission : {player.total_mission}
+Mission réussie : {player.mission_réussie}
+Pourcentage de réussite : {player.pourcentage_de_réussite}% 
+Tous les systèmes sont opérationnels.
+En attente des ordres...
+====================================
+"""
+    show_terminal("AnkArmy", content)
     
-
-    show_terminal("AnkArmy - Rapport de mission", content)
+    

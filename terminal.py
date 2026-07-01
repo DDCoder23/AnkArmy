@@ -159,7 +159,7 @@ Continuez votre progression.
 ====================================
 """
 
-     show_terminal("""
+    show_terminal("""
 ====================================
 🪖 ANKARMY AIR COMMAND - PROMOTION
 ====================================

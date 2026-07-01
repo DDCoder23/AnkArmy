@@ -47,7 +47,7 @@ def on_state_change(new_state, old_state):
         print(">>> END SESSION")
         engine.end_session()
 
-gui_hooks.state_did_change.append(on_state_change)
+
 
 
 

@@ -32,14 +32,13 @@ Grades = [
     Grade("Général d'armée aérienne", 20400),
     
 ]
-def get_next_grade(current_grade):
-    for i, grade in enumerate(GRADES):
-        if grade.name == current_grade:
-            if i + 1 < len(GRADES):
-                return GRADES[i + 1]
-            return None
+def get_next_grade(current_grade: Grade):
+    index = Grades.index(current_grade)
 
-    return GRADES[0]
+    if index + 1 >= len(Grades):
+        return None
+
+    return Grades[index + 1]
 def check_promotion(player) -> bool:
     next_grade = get_next_grade(player.grade)
 

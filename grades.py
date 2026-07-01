@@ -13,7 +13,7 @@ Grades = [
     Grade("Aviateur confirmé", 50),
     Grade("Aviateur de 1ère classe", 150),
     Grade("Caporal", 300),
-    Grade("Caporal-chef ", 600),
+    Grade("Caporal-chef", 600),
     Grade("Sergent", 1000),
     Grade("Sergent-chef", 1500),
     Grade("Adjudant", 2200),
@@ -32,13 +32,14 @@ Grades = [
     Grade("Général d'armée aérienne", 20400),
     
 ]
-def get_next_grade(current_grade: Grade):
-    index = Grades.index(current_grade)
+def get_next_grade(current_grade):
+    for i, grade in enumerate(GRADES):
+        if grade.name == current_grade:
+            if i + 1 < len(GRADES):
+                return GRADES[i + 1]
+            return None
 
-    if index + 1 >= len(Grades):
-        return None
-
-    return Grades[index + 1]
+    return GRADES[0]
 def check_promotion(player) -> bool:
     next_grade = get_next_grade(player.grade)
 

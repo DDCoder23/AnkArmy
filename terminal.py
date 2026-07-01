@@ -41,9 +41,9 @@ WRONG: {player.cards_wrong}
 
 
 def show_end_session(player):
-    session_xp = self.player.cards_correct
+    session_xp = player.cards_correct
     
-    session_wrong = self.player.cards_wrong
+    session_wrong = player.cards_wrong
     total = session_xp + session_wrong
 
     content = f"""

@@ -89,7 +89,7 @@ Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
-     show_terminal("""
+    show_terminal("""
 ====================================
 🪖 ANKARMY AIR COMMAND - 📦 RAPPORT DE MISSION
 ====================================

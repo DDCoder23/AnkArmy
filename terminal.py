@@ -109,10 +109,10 @@ def show_boot(player):
 Connexion au Commandement...
 Vérification du dossier...
 Accès autorisé.
-Bienvenue, {player.grade.name.name}.
+Bienvenue, {player.grade.name}.
 STATUS : CONNECTED
 USER   : {username}
-RANK   : {player.grade.name.name}
+RANK   : {player.grade.name}
 DISCIPLINE  : {discipline}
 ------------------------------------
 📊 STATUS

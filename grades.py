@@ -33,12 +33,12 @@ Grades = [
     
 ]
 def get_next_grade(current_grade: Grade):
-    index = GRADES.index(current_grade)
+    index = Grades.index(current_grade)
 
-    if index + 1 >= len(GRADES):
+    if index + 1 >= len(Grades):
         return None
 
-    return GRADES[index + 1]
+    return Grades[index + 1]
 def check_promotion(player) -> bool:
     next_grade = get_next_grade(player.grade)
 

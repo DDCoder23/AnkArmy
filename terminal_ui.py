@@ -50,7 +50,7 @@ class TerminalDialog(QDialog):
 
         
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.write)
+        self.timer.timeout.connect(self.write_next_character)
         self.timer.start(15)
 
     def write_next_character(self):

@@ -20,10 +20,10 @@ class TerminalDialog(QDialog):
         self.cursor_visible = True
         layout = QVBoxLayout()
         title = QLabel("🪖 ANKARMY AIR COMMAND")
-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title.setAlignment(aqt.qt.AlignmentFlag.AlignCenter)
 
         self.label = QLabel("")
-        self.label.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+        self.label.setAlignment(aqt.qt.AlignmentFlag.AlignTop | aqt.qt.AlignmentFlag.AlignLeft)
         self.label.setWordWrap(True)
 
         self.label.setStyleSheet("""

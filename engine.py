@@ -16,7 +16,7 @@ class Engine:
         self._starting = False
 
 
-    self.session_active = True
+    
     # START SESSION
     def start_session(self):
         print("REVIEWER STARTED")
@@ -30,7 +30,7 @@ class Engine:
 
 
         try:
-            session_active = True
+            self.session_active = True
 
             # 📦 reset stats session
             self.player.reset_session()

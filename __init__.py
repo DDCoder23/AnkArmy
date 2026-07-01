@@ -21,11 +21,6 @@ def on_answer(*args, **kwargs):
 
 
 
-
-def on_end_session(*args, **kwargs):
-    print("REVIEWER END")
-    
-    engine.end_session()
     
 
 
@@ -50,5 +45,4 @@ def on_state_change(new_state, old_state):
 
 gui_hooks.state_did_change.append(on_state_change)
 gui_hooks.reviewer_did_answer_card.append(on_answer)
-gui_hooks.reviewer_will_end.append(on_end_session)
 gui_hooks.profile_did_open.append(on_profile_open)

@@ -34,4 +34,4 @@ def on_end_session(*args, **kwargs):
 
 gui_hooks.reviewer_did_init.append(engine.start_session())
 gui_hooks.reviewer_did_answer_card.append(on_answer)
-gui_hooks.reviewer_will_end.append(on_end_session)
+gui_hooks.reviewer_will_end.append(engine.end_session())

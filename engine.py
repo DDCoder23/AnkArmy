@@ -27,6 +27,7 @@ class Engine:
         self._starting = True
         if mw.col is None :
             print("⚠️ Collection not ready yet")
+            self._starting=False
             return
 
 

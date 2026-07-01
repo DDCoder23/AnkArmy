@@ -41,6 +41,7 @@ class Engine:
 
             # 🎯 génération mission
         self.current_mission = generate_mission(self.player)
+        print(self.current_mission)
         self.player.total_mission += 1
         self.player.mission_completed = False
 

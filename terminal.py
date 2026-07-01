@@ -32,8 +32,9 @@ def show_session(player, mission):
 📊 STATUS
 XP: {player.xp}
 DISCIPLINE: {player.discipline}
-CORRECT: {player.cards_correct}
-WRONG: {player.cards_wrong}
+Nombre total de mission : {player.total_mission}
+Mission réussie : {player.mission_réussie}
+Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
     show_terminal("AnkArmy", content)
@@ -59,13 +60,18 @@ DISCIPLINE: {player.discipline}
 📈 SESSION
 ✔ Correctes: {player.cards_correct}
 ✘ Erreurs: {player.cards_wrong}
-Accuracy : {accuracy}
+Accuracy : {accuracy} 
+  Etat de la mission : "complète" if player.mission_completed else "incomplète"
+
 
 
 
 ------------------------------------
 🪖 STATUT
 Grade: {player.grade}
+Nombre total de mission : {player.total_mission}
+Mission réussie : {player.mission_réussie}
+Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
 

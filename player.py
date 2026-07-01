@@ -12,6 +12,11 @@ class Player:
         self.cards_correct = cards_correct
         self.cards_wrong = cards_wrong
         self.grade = grade
+        self.current_mission = None
+        self.mission_completed = False
+        self.total_mission=0
+        self.mission_réussie=0
+        self.pourcentage_de_réussite=0
 
     def add_xp(self, amount):
         self.xp += amount
@@ -34,7 +39,10 @@ class Player:
         "discipline": self.discipline,
         "cards_correct": self.cards_correct,
         "cards_wrong": self.cards_wrong,
-        "grade": self.grade
+        "grade": self.grade,
+        "total des missions" : self.total_mission,
+         "missions réussies": self.mission_réussie,
+        "pourcentage de réussite" : self.pourcentage_de_réussite
     }
     @classmethod
     def from_dict(cls, data):
@@ -43,7 +51,10 @@ class Player:
         discipline=data.get("discipline", 100),
         cards_correct=data.get("cards_correct", 0),
         cards_wrong=data.get("cards_wrong", 0),
-        grade=data.get("grade", "Soldat")
+        grade=data.get("grade", "Soldat"),
+        total_mission=data.get("total des missions", 0),
+        mission_réussie=data.get("missions réussies", 0)
+        pourcentage_de_réussite=data.get("pourcentage de réussite",0)
     )
     def gain_discipline(self, amount):
         self.discipline = min(100, self.discipline + amount)

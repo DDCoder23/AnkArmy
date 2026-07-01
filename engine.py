@@ -10,15 +10,19 @@ from .terminal import show_session,show_end_session
 class Engine:
     def __init__(self):
         self.player = load_player()
-        self.mission = None
+        
 
     # START SESSION
     def start_session(self):
         self.player.reset_session()
+        self.player.current_mission = generate_mission(self.player)
+        self.player.total_mission+=1
+        
+        self.player.mission_completed = False
 
-        self.mission = generate_mission(self.player)
+        
 
-        show_session(self.player,self.mission)
+        show_session(self.player,self.player.current_mission)
 
 
     # CARD RESULT
@@ -29,17 +33,27 @@ class Engine:
 
     # END SESSION
     def end_session(self):
+        mission = self.player.current_mission
         xp_gain = self.player.cards_correct
         self.player.add_xp(xp_gain)
-        
-
-        
-
-        # discipline simple
-        if self.player.cards_wrong == 0:
+        if self.player.mission_completed and  self.player.cards_wrong == 0 :
+            self.player.gain_discipline(4)
+            self.player.add_xp(10)
+        elif self.player.mission_completed:
             self.player.gain_discipline(2)
+        
+        else:
+            self.player.lose_discipline(1)
+        self.player.pourcentage_de_réussite=self.player.mission_réussie//self.player.total_mission
         show_end_session(self.player)
         
 
 
         save_player(self.player)
+    def check_mission_progress(self):
+        mission = self.player.current_mission
+
+        if self.player.cards_correct >= mission["target"]:
+            self.player.mission_completed = True
+            self.player.mission_réussie+=1
+        

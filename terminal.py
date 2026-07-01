@@ -30,9 +30,7 @@ def show_terminal(title, content):
     dialog.exec()
 def show_session(player, mission):
     content = f"""
-====================================
-🪖 ANKARMY AIR COMMAND - TERMINAL SYSTEM
-====================================
+
 
 📡 MISSION
 {mission['objective']}
@@ -46,7 +44,11 @@ Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
-    show_terminal("AnkArmy", content)
+    show_terminal("""
+====================================
+🪖 ANKARMY AIR COMMAND - TERMINAL SYSTEM
+====================================
+""", content)
 
 
 
@@ -63,9 +65,6 @@ def show_end_session(player):
     accuracy = (session_xp / total) * 100 if total > 0 else 0
     état= "complète" if player.mission_completed else "incomplète"
     content = f"""
-====================================
-📦 RAPPORT DE MISSION
-====================================
 
 📊 RÉSULTATS
 XP TOTAL: {player.xp}
@@ -90,7 +89,12 @@ Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 
 ====================================
 """
-    show_terminal("AnkArmy", content)
+    show_terminal("""
+====================================
+🪖 ANKARMY AIR COMMAND - 📦 RAPPORT DE MISSION
+====================================
+""", content)
+
 
 
 def show_boot(player):
@@ -101,9 +105,7 @@ def show_boot(player):
     ) 
      discipline="STABLE" if player.discipline >= 75 else "WARNING"
      content = f"""
-====================================
-🪖 ANKARMY AIR COMMAND - TERMINAL SYSTEM
-====================================
+
 Connexion au Commandement...
 Vérification du dossier...
 Accès autorisé.
@@ -124,14 +126,16 @@ Tous les systèmes sont opérationnels.
 En attente des ordres...
 ====================================
 """
-     show_terminal("AnkArmy", content)
+      show_terminal("""
+====================================
+🪖 ANKARMY AIR COMMAND - TERMINAL SYSTEM
+====================================
+""", content)
 def show_promo(player, old_grade):
     play_sound("promotion.wav")
 
     content = f"""
-====================================
-🪖 ANKARMY AIR COMMAND
-====================================
+
 
        ★★★★★★★★★★★★★★★★
 
@@ -155,7 +159,11 @@ Continuez votre progression.
 ====================================
 """
 
-    show_terminal("🎖 Promotion", content)
+          show_terminal("""
+====================================
+🪖 ANKARMY AIR COMMAND - PROMOTION
+====================================
+""", content)
      
 def render_progress_bar(current: int, total: int, length: int = 20) -> str:
     if total == 0:

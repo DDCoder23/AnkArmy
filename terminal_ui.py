@@ -72,8 +72,8 @@ class TerminalDialog(QDialog):
             return
     def blink_cursor(self):
         if self.cursor_visible:
-            self.label.setText(self.current_text + "█")
+            self.body.setText(self.current_text + "█")
         else:
-            self.label.setText(self.current_text)
+            self.body.setText(self.current_text)
 
         self.cursor_visible = not self.cursor_visible

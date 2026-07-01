@@ -19,28 +19,38 @@ class TerminalDialog(QDialog):
         self.index = 0
         self.cursor_visible = True
         layout = QVBoxLayout()
-        title = QLabel("🪖 ANKARMY AIR COMMAND")
-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.label = QLabel("")
-        self.label.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
-        self.label.setWordWrap(True)
-
-        self.label.setStyleSheet("""
-            QLabel{
-                background:#101010;
-                color:#00ff66;
-                font-family:Consolas;
-                font-size:14px;
-                padding:15px;
-            }
+        self.title = QLabel(title_text)
+        self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.title.setStyleSheet("""
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ff66;
+            padding: 10px;
         """)
 
-        layout.addWidget(self.label)
+        # 🔥 CONTENU
+        self.body = QLabel("")
+        self.body.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+        self.body.setWordWrap(True)
+        self.body.setStyleSheet("""
+            font-family: Consolas;
+            background-color: #101010;
+            color: #00ff66;
+            padding: 10px;
+        """)
+
+        layout.addWidget(self.title)
+        layout.addWidget(self.body)
+
         self.setLayout(layout)
 
+        # animation (si tu en as une)
+        self.full_text = content
+        self.index = 0
+
+        
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.write_next_character)
+        self.timer.timeout.connect(self.write)
         self.timer.start(15)
 
     def write_next_character(self):

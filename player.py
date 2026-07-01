@@ -40,7 +40,7 @@ class Player:
         "discipline": self.discipline,
         "cards_correct": self.cards_correct,
         "cards_wrong": self.cards_wrong,
-        "grade": self.grade,
+        "grade": self.grade.name,
         "total des missions" : self.total_mission,
          "missions reussies": self.mission_réussie,
         "pourcentage de reussite" : self.pourcentage_de_réussite
@@ -52,7 +52,10 @@ class Player:
         discipline=data.get("discipline", 100),
         cards_correct=data.get("cards_correct", 0),
         cards_wrong=data.get("cards_wrong", 0),
-        grade=data.get("grade", "Soldat"),
+        player.grade = next(
+        (g for g in GRADES if g.name == data["grade"]),
+        GRADES[0]
+    )
         total_mission=data.get("total des missions", 0),
         mission_réussie=data.get("missions reussies", 0),
         pourcentage_de_réussite=data.get("pourcentage de reussite",0)

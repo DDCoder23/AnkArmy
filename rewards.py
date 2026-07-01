@@ -1,4 +1,4 @@
-
+from .state import save_player
 def end_session_rewards(player):
     xp_gain = player.cards_correct
     player.add_xp(xp_gain)

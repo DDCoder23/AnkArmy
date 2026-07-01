@@ -22,6 +22,10 @@ class Engine:
         if self.session_active or self._starting:
             return
         self._starting = True
+        if mw.col is None:
+            print("⚠️ Collection not ready yet")
+            return
+
 
         try:
             self.session_active = True

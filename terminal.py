@@ -102,6 +102,6 @@ Tous les systèmes sont opérationnels.
 En attente des ordres...
 ====================================
 """
-    show_terminal("AnkArmy", content)
+     show_terminal("AnkArmy", content)
     
     

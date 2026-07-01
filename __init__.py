@@ -37,9 +37,19 @@ def on_profile_open(*args, **kwargs):
     on_start_session()
 
 def on_state_change(new_state, old_state):
-    print("STATE:", old_state, "->", new_state)
+    print(f"STATE: {old_state} -> {new_state}")
+
+    if new_state == "review":
+        print(">>> START SESSION")
+        engine.start_session()
+
+    elif old_state == "review":
+        print(">>> END SESSION")
+        engine.end_session()
 
 gui_hooks.state_did_change.append(on_state_change)
+
+
 
 gui_hooks.reviewer_did_init.append(on_start_session)
 gui_hooks.reviewer_did_answer_card.append(on_answer)

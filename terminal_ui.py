@@ -1,7 +1,7 @@
 from aqt.qt import (
     QDialog,
     QVBoxLayout,
-    QLabel,
+    QLabel,Qt
 )
 from PyQt6.QtCore import QTimer
 from aqt import mw
@@ -20,10 +20,10 @@ class TerminalDialog(QDialog):
         self.cursor_visible = True
         layout = QVBoxLayout()
         title = QLabel("🪖 ANKARMY AIR COMMAND")
-        title.setAlignment(qt.AlignmentFlag.AlignCenter)
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.label = QLabel("")
-        self.label.setAlignment(qt.AlignmentFlag.AlignTop | qt.AlignmentFlag.AlignLeft)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
         self.label.setWordWrap(True)
 
         self.label.setStyleSheet("""

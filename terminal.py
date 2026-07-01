@@ -8,6 +8,7 @@ from aqt.qt import (
 from PyQt6.QtMultimedia import QSoundEffect
 from PyQt6.QtCore import QUrl
 import os
+from .grades import get_next_grade
 _sound = None
 
 def play_sound(filename):

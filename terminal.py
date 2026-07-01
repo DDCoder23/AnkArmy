@@ -171,7 +171,7 @@ Continuez votre progression.
 """
 
     show_terminal("🎖 Promotion", content)
-     show_terminal("AnkArmy", content)
+     
 def render_progress_bar(current: int, total: int, length: int = 20) -> str:
     if total == 0:
         return "[--------------------] 0%"

@@ -1,57 +1,54 @@
-from .state import load_state, save_state
+from .state import load_player, save_player
 from .mission import generate_mission
 from .terminal import show_header, show_mission, show_status, show_footer
 
 
-def end_session(self):
-    
-    save_state(self.state)
+
 
     
 
 class Engine:
     def __init__(self):
-        self.state = load_state()
+        self.player = load_player()
         self.mission = None
 
     # START SESSION
     def start_session(self):
-        self.state["cards_correct"] = 0
-        self.state["cards_wrong"] = 0
+        self.player.reset_session()
 
-        self.mission = generate_mission(self.state)
+        self.mission = generate_mission(self.player)
         show_header()
         show_mission(self.mission)
-        show_status(self.state)
+        show_status(self.player)
         show_footer()
 
     # CARD RESULT
     def review_card(self, correct: bool):
         if correct:
-            self.state["xp"] += 1
-            self.state["cards_correct"] += 1
+            self.player.add_xp(1)
+            self.player.add_correct_card()
         else:
-            self.state["discipline"] -= 1
-            self.state["cards_wrong"] += 1
+            self.player.lose_discipline(1)
+            self.player.add_wrong_card()
 
-        save_state(self.state)   # 🔥 IMPORTANT
+        save_player(self.player)   # 🔥 IMPORTANT
 
     # END SESSION
     def end_session(self):
-        xp_gain=self.state["cards_correct"]
-        self.state["xp"]+=xp_gain
+        xp_gain = self.player.cards_correct
+        self.player.add_xp(xp_gain)
         
 
         
 
         # discipline simple
-        if self.state["cards_wrong"] == 0:
-            self.state["discipline"] += 2
+        if self.player.cards_wrong == 0:
+            self.player.gain_discipline(2)
 
         show_header()
         print("📦 SESSION TERMINÉE")
-        show_status(self.state)
+        show_status(self.player)
         show_footer()
 
 
-        save_state(self.state)
+        save_player(self.player)

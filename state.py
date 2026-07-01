@@ -1,29 +1,27 @@
 import json
 import os
-
+from .player import Player
 SAVE_PATH = os.path.join(os.path.dirname(__file__), "data", "save.json")
-DEFAULT_STATE = {
-    "xp": 0,
-    "discipline": 100,
-    "cards_correct": 0,
-    "cards_wrong": 0
-}
+DEBUG_PATH = os.path.join(os.path.dirname(__file__), "debug.log")
 
-def load_state():
-    if not os.path.exists(SAVE_PATH):
-        return DEFAULT_STATE.copy()
+def load_player()-> Player:
+    if not os.path.exists(SAVE_PATH) or os.path.getsize(SAVE_PATH) == 0:
+        return Player()
+    
     try:
         with open(SAVE_PATH, "r") as f:
-            return json.load(f)
+            data = json.load(f)
+            return Player.from_dict(data)
 
-    except:
-        save_state(DEFAULT_STATE)
-        return DEFAULT_STATE.copy()
+    except Exception as e:
+        with open(DEBUG_PATH, "a") as f:
+            f.write(str(e)+"\n")
+        return Player()
 
     
 
-def save_state(state):
+def save_player(player:Player):
     os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
 
     with open(SAVE_PATH, "w") as f:
-        json.dump(state, f, indent=4)
+        json.dump(player.to_dict(), f, indent=4)

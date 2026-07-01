@@ -47,7 +47,7 @@ def show_end_session(player):
     session_wrong = player.cards_wrong
     total = session_xp + session_wrong
     accuracy = (session_xp / total) * 100 if total > 0 else 0
-
+    état= "complète" if player.mission_completed else "incomplète"
     content = f"""
 ====================================
 📦 RAPPORT DE MISSION
@@ -61,7 +61,7 @@ DISCIPLINE: {player.discipline}
 ✔ Correctes: {player.cards_correct}
 ✘ Erreurs: {player.cards_wrong}
 Accuracy : {accuracy} 
-  Etat de la mission : "complète" if player.mission_completed else "incomplète"
+Etat de la mission : {état}  
 
 
 

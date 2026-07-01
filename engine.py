@@ -10,10 +10,14 @@ from .terminal import show_session,show_end_session
 class Engine:
     def __init__(self):
         self.player = load_player()
+        self.session_active = False
         
 
     # START SESSION
     def start_session(self):
+        if self.session_active:
+            return
+        self.session_active = True
         self.player.reset_session()
         self.player.current_mission = generate_mission(self.player)
         self.player.total_mission+=1
@@ -33,6 +37,9 @@ class Engine:
 
     # END SESSION
     def end_session(self):
+        if not self.session_active:
+            return
+        self.session_active = False
         mission = self.player.current_mission
         xp_gain = self.player.cards_correct
         self.player.add_xp(xp_gain)

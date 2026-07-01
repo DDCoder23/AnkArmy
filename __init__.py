@@ -19,16 +19,18 @@ def on_answer(*args, **kwargs):
     
 
 
-def on_reviewer_init(reviewer):
+def on_start_session(*args, **kwargs):
     print("REVIEWER STARTED")
+    
     engine.start_session()
 
 
-def on_reviewer_end():
+def on_end_session(*args, **kwargs):
     print("REVIEWER END")
     engine.end_session()
+    engine.current_mission = None
 
 
-gui_hooks.reviewer_did_init.append(on_reviewer_init)
+gui_hooks.reviewer_did_init.append(on_start_session)
 gui_hooks.reviewer_did_answer_card.append(on_answer)
-gui_hooks.reviewer_will_end.append(on_reviewer_end)
+gui_hooks.reviewer_will_end.append(on_end_session)

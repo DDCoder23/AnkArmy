@@ -59,7 +59,7 @@ class TerminalDialog(QDialog):
             return
 
         self.current_text += self.full_text[self.index]
-        self.label.setText(self.current_text)
+        self.body.setText(self.current_text)
 
         self.index += 1
         if self.index >= len(self.full_text):

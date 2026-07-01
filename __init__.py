@@ -20,7 +20,7 @@ def on_answer(*args, **kwargs):
 
 
 def on_start_session(*args, **kwargs):
-    print("REVIEWER STARTED")
+    
   
     engine.start_session()
 

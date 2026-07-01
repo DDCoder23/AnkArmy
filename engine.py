@@ -21,6 +21,7 @@ class Engine:
     def start_session(self):
         print("REVIEWER STARTED")
         print(self.session_active)
+        print(self._starting)
         if self.session_active or self._starting:
             return
         self._starting = True
@@ -29,27 +30,25 @@ class Engine:
             return
 
 
-        try:
-            self.session_active = True
+            
+        self.session_active = True
 
-            # 📦 reset stats session
-            self.player.reset_session()
+        self.player.reset_session()
 
             # 🪖 lock deck actuel
-            self.locked_deck_id = mw.col.decks.current()["id"]
+        self.locked_deck_id = mw.col.decks.current()["id"]
 
             # 🎯 génération mission
-            self.current_mission = generate_mission(self.player)
-            self.player.total_mission += 1
-            self.player.mission_completed = False
+        self.current_mission = generate_mission(self.player)
+        self.player.total_mission += 1
+        self.player.mission_completed = False
 
             # 🖥️ affichage
-            show_session(self.player, self.current_mission)
+        show_session(self.player, self.current_mission)
 
-            print("🟢 SESSION STARTED")
-            print(f"📦 Deck locked: {self.locked_deck_id}")
-        except Exceptions as e:
-           print(e)
+        print("🟢 SESSION STARTED")
+        print(f"📦 Deck locked: {self.locked_deck_id}")
+        
 
 
         

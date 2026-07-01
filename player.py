@@ -60,7 +60,7 @@ class Player:
     ) 
         player.grade = next(
         (g for g in GRADES if g.name == data["grade"]),
-        GRADES[0]
+        GRADES[0])
         return player
     def gain_discipline(self, amount):
         self.discipline = min(100, self.discipline + amount)

@@ -9,7 +9,7 @@ from PyQt6.QtMultimedia import QSoundEffect
 from PyQt6.QtCore import QUrl
 import os
 from .grades import get_next_grade
-from .terminal_dialog import TerminalDialog
+from .terminal_ui import TerminalDialog
 _sound = None
 
 def play_sound(filename):

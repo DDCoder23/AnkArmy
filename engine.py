@@ -1,6 +1,6 @@
 from .state import load_player, save_player
 from .mission import generate_mission
-from .terminal import show_header, show_mission, show_status, show_footer
+from .terminal import show_session,show_end_session
 
 
 
@@ -17,19 +17,13 @@ class Engine:
         self.player.reset_session()
 
         self.mission = generate_mission(self.player)
-        show_header()
-        show_mission(self.mission)
-        show_status(self.player)
-        show_footer()
+
+        show_session(self.player,self.mission)
+
 
     # CARD RESULT
     def review_card(self, correct: bool):
-        if correct:
-            self.player.add_xp(1)
-            self.player.add_correct_card()
-        else:
-            self.player.lose_discipline(1)
-            self.player.add_wrong_card()
+        self.player.process_result(correct)
 
         save_player(self.player)   # 🔥 IMPORTANT
 
@@ -44,11 +38,8 @@ class Engine:
         # discipline simple
         if self.player.cards_wrong == 0:
             self.player.gain_discipline(2)
-
-        show_header()
-        print("📦 SESSION TERMINÉE")
-        show_status(self.player)
-        show_footer()
+        show_end_session(self.player)
+        
 
 
         save_player(self.player)

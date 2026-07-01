@@ -47,3 +47,18 @@ class Player:
     )
     def gain_discipline(self, amount):
         self.discipline = min(100, self.discipline + amount)
+    def process_result(self, correct: bool):
+        if correct:
+            self.add_xp(1)
+            self.add_correct()
+        else:
+            self.lose_discipline(1)
+            self.add_wrong_card()
+    def get_status(self):
+        return {
+        "xp": self.xp,
+        "discipline": self.discipline,
+        "grade": self.grade,
+        "correct": self.cards_correct,
+        "wrong": self.cards_wrong
+    }

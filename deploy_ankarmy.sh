@@ -19,3 +19,4 @@ rsync -av \
   "$SOURCE/" "$TARGET/"
 
 echo "✅ AnkArmy deployed successfully!"
+anki

@@ -1,8 +1,8 @@
 from .state import load_player, save_player
 from .mission import generate_mission
-from .terminal import show_session,show_end_session,show_boot
-
-
+from .terminal import show_session,show_end_session,show_boot, show_promo
+from .rewards import end_session_rewards
+from .grades import check_promotion
 
 
     
@@ -62,20 +62,12 @@ class Engine:
             return
         self.session_active = False
         print(self.session_active)
+        end_session_reward(self.player)
+        old=self.player.grade
+        if check_promotion(self.player): 
+            show_promo(self.player,old)
         
-        mission = self.current_mission
-        xp_gain = self.player.cards_correct
-        self.player.add_xp(xp_gain)
-        if self.player.mission_completed and  self.player.cards_wrong == 0 :
-            self.player.gain_discipline(4)
-            self.player.add_xp(10)
-        elif self.player.mission_completed:
-            self.player.gain_discipline(2)
         
-        else:
-            self.player.lose_discipline(1)
-        self.player.pourcentage_de_réussite=self.player.mission_réussie//self.player.total_mission
-        save_player(self.player)
         show_end_session(self.player)
         
 

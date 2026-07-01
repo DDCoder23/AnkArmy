@@ -1,3 +1,4 @@
+from .grades import Grades
 class Player:
     def __init__(
         self,
@@ -5,7 +6,7 @@ class Player:
         discipline=100,
         cards_correct=0,
         cards_wrong=0,
-        grade="Recrue"
+        grade=Grades[0]
     ):
         self.xp = xp
         self.discipline = discipline

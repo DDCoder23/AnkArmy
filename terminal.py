@@ -1,8 +1,32 @@
-from aqt.qt import QDialog, QVBoxLayout, QLabel
 from aqt import mw
+from aqt.qt import (
+    QDialog,
+    QVBoxLayout,
+    QLabel,
+    QApplication,
+)
+from PyQt6.QtMultimedia import QSoundEffect
+from PyQt6.QtCore import QUrl
+import os
+_sound = None
 
+def play_sound(filename):
+    global _sound
+
+    path = os.path.join(os.path.dirname(__file__), "assets", "sounds", filename)
+
+    if not os.path.exists(path):
+        return
+
+    _sound = QSoundEffect()
+    _sound.setSource(QUrl.fromLocalFile(path))
+    _sound.setVolume(0.8)
+    _sound.play()
 def show_terminal(title, content):
-    dialog = QDialog()
+    dialog = QDialog(mw)
+    dialog.setMinimumWidth(650)
+    dialog.setMinimumHeight(450)
+    label.setWordWrap(True)
     dialog.setWindowTitle(title)
 
     layout = QVBoxLayout()
@@ -43,6 +67,11 @@ Pourcentage de réussite : {player.pourcentage_de_réussite}%
 
 def show_end_session(player):
     session_xp = player.cards_correct
+    bar = render_progress_bar(
+        player.xp,
+        get_next_grade(player.grade).xp_required
+    ) 
+    
     
     session_wrong = player.cards_wrong
     total = session_xp + session_wrong
@@ -61,7 +90,9 @@ DISCIPLINE: {player.discipline}
 ✔ Correctes: {player.cards_correct}
 ✘ Erreurs: {player.cards_wrong}
 Accuracy : {accuracy} 
-Etat de la mission : {état}  
+Etat de la mission : {état}
+PROGRESSION: {bar}
+ 
 
 
 
@@ -79,6 +110,10 @@ Pourcentage de réussite : {player.pourcentage_de_réussite}%
 
 def show_boot(player):
      username = mw.pm.name
+     bar = render_progress_bar(
+        player.xp,
+        get_next_grade(player.grade).xp_required
+    ) 
      discipline="STABLE" if player.discipline >= 75 else "WARNING"
      content = f"""
 ====================================
@@ -95,6 +130,7 @@ DISCIPLINE  : {discipline}
 ------------------------------------
 📊 STATUS
 XP: {player.xp}
+PROGRESSION: {bar}
 DISCIPLINE: {player.discipline}
 Nombre total de mission : {player.total_mission}
 Mission réussie : {player.mission_réussie}
@@ -104,5 +140,59 @@ En attente des ordres...
 ====================================
 """
      show_terminal("AnkArmy", content)
+def show_promo(player, old_grade):
+    play_sound("promotion.wav")
+
+    content = f"""
+====================================
+🪖 ANKARMY AIR COMMAND
+====================================
+
+       ★★★★★★★★★★★★★★★★
+
+      PROMOTION OFFICIELLE
+
+Félicitations Soldat !
+
+Ancien grade :
+    {old_grade}
+
+Nouveau grade :
+    {player.grade}
+
+Votre efficacité a été reconnue
+par le Haut Commandement.
+
+Continuez votre progression.
+
+       ★★★★★★★★★★★★★★★★
+
+====================================
+"""
+
+    show_terminal("🎖 Promotion", content)
+     show_terminal("AnkArmy", content)
+def render_progress_bar(current: int, total: int, length: int = 20) -> str:
+    if total == 0:
+        return "[--------------------] 0%"
+
+    percent = int((current / total) * 100)
+    filled_length = int(length * current // total)
+
+    bar = "█" * filled_length + "-" * (length - filled_length)
+
+    return f"[{bar}] {percent}%"
+
+def show_status(player):
+    print("\n📊 STATUS")
+    print(f"GRADE: {player.grade.name}")
+    print(f"XP: {player.xp_in_grade}/{player.grade.xp_required}")
+
+    
+
+    print(f"")
+
+    print(f"CORRECT: {player.cards_correct} | WRONG: {player.cards_wrong}")
+    print(f"DISCIPLINE: {player.discipline}")
     
     

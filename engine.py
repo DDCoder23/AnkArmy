@@ -15,6 +15,7 @@ class Engine:
 
     # START SESSION
     def start_session(self):
+        print("REVIEWER STARTED")
         print(self.session_active)
         if self.session_active:
             return
@@ -34,7 +35,7 @@ class Engine:
     # CARD RESULT
     def review_card(self, correct: bool):
         self.player.process_result(correct)
-
+        self.check_mission_progress()
         save_player(self.player)   # 🔥 IMPORTANT
 
     # END SESSION

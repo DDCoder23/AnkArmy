@@ -5,6 +5,6 @@ def generate_mission(player):
 
     print("mission générée")
     return {
-        "objective": f"Réviser {base+random.randint(10,15} cartes",
+        "objective": f"Réviser {base+random.randint(10,15)} cartes",
         "target": base
     }

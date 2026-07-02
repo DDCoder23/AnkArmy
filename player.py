@@ -6,7 +6,7 @@ class Player:
         discipline=100,
         cards_correct=0,
         cards_wrong=0,
-        grade=Grades[0]
+        grade=Grades[0],args*,kwargs**
     ):
         self.xp = xp
         self.discipline = discipline
@@ -15,9 +15,9 @@ class Player:
         self.grade = grade
         self.current_mission = None
         self.mission_completed = False
-        self.total_mission=0
-        self.mission_réussie=0
-        self.pourcentage_de_réussite=0
+        self.total_mission=kwargs.get("total_mission",0)
+        self.mission_réussie=kwargs.get("mission_réussie",0)
+        self.pourcentage_de_réussite=kwargs.get("pourcentage_de_réussite",0)
 
     def add_xp(self, amount):
         self.xp += amount

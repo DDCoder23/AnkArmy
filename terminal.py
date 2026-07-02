@@ -148,7 +148,7 @@ Ancien grade :
     {old_grade}
 
 Nouveau grade :
-    {player.grade.name.name}
+    {player.grade.name}
 
 Votre efficacité a été reconnue
 par le Haut Commandement.

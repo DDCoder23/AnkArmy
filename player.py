@@ -59,8 +59,8 @@ class Player:
         pourcentage_de_réussite=data.get("pourcentage de reussite",0)
     ) 
         player.grade = next(
-        (g for g in GRADES if g.name == data["grade"]),
-        GRADES[0])
+        (g for g in Grades if g.name == data["grade"]),
+        Grades[0])
         return player
     def gain_discipline(self, amount):
         self.discipline = min(100, self.discipline + amount)

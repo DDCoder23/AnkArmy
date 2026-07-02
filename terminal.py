@@ -117,7 +117,7 @@ DISCIPLINE  : {discipline}
 ------------------------------------
 📊 STATUS
 XP: {player.xp}
-PROGRESSION: {bar}
+PROGRESSION DANS LE GRADE: {bar}
 DISCIPLINE: {player.discipline}
 Nombre total de mission : {player.total_mission}
 Mission réussie : {player.mission_réussie}

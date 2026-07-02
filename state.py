@@ -5,9 +5,9 @@ SAVE_PATH = os.path.join(os.path.dirname(__file__), "data", "save.json")
 DEBUG_PATH = os.path.join(os.path.dirname(__file__), "debug.log")
 
 def load_player()-> Player:
-    if not os.path.exists(SAVE_PATH) or os.path.getsize(SAVE_PATH) != 0:
-        print(os.path.getsize(SAVE_PATH))
-        print('fichier inexistant ou vide')
+    if not os.path.exists(SAVE_PATH) :
+        
+        print('fichier inexistant ')
         return Player()
     
     try:

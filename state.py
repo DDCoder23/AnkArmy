@@ -6,6 +6,7 @@ DEBUG_PATH = os.path.join(os.path.dirname(__file__), "debug.log")
 
 def load_player()-> Player:
     if not os.path.exists(SAVE_PATH) or os.path.getsize(SAVE_PATH) == 0:
+        print('fichier inexistant ou vide')
         return Player()
     
     try:
@@ -16,6 +17,7 @@ def load_player()-> Player:
     except Exception as e:
         with open(DEBUG_PATH, "a") as f:
             f.write(str(e)+"\n")
+        print(str(e))
         return Player()
 
     

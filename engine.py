@@ -10,6 +10,7 @@ from .grades import check_promotion
 class Engine:
     def __init__(self):
         self.player = load_player()
+        print('player loaded')
         self.session_active = False
         
         self.current_mission={}

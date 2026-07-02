@@ -176,16 +176,6 @@ def render_progress_bar(current: int, total: int, length: int = 20) -> str:
 
     return f"[{bar}] {percent}%"
 
-def show_status(player):
-    print("\n📊 STATUS")
-    print(f"GRADE: {player.grade.name.name.name}")
-    print(f"XP: {player.xp_in_grade}/{player.grade.name.name.xp_required}")
 
-    
-
-    print(f"")
-
-    print(f"CORRECT: {player.cards_correct} | WRONG: {player.cards_wrong}")
-    print(f"DISCIPLINE: {player.discipline}")
     
     

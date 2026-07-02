@@ -81,5 +81,8 @@ class Engine:
             self.player.mission_completed = True
             self.player.mission_réussie+=1
     def accueil (self):
+        self.player = load_player()
+        print('player loaded')
+
         show_boot(self.player)
         

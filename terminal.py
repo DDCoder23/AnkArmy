@@ -99,6 +99,7 @@ Pourcentage de réussite : {player.pourcentage_de_réussite}%
 
 def show_boot(player):
      username = mw.pm.name
+     
      bar = render_progress_bar(
         player.xp,
         get_next_grade(player.grade).xp_required

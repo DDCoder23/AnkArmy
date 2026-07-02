@@ -6,7 +6,7 @@ class Player:
         discipline=100,
         cards_correct=0,
         cards_wrong=0,
-        grade=Grades[0],args*,kwargs**
+        grade=Grades[0],*args, **kwargs
     ):
         self.xp = xp
         self.discipline = discipline

@@ -8,6 +8,8 @@ def load_player()-> Player:
     if not os.path.exists(SAVE_PATH) :
         
         print('fichier inexistant')
+        if not os.path.exists(SAVE_PATH):
+            save_player(Player())
         return Player()
     
     try:
@@ -19,6 +21,7 @@ def load_player()-> Player:
         with open(DEBUG_PATH, "a") as f:
             f.write(str(e)+"\n")
         print(str(e))
+        save_player(Player())
         return Player()
 
     

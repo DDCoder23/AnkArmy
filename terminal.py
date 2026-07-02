@@ -56,7 +56,7 @@ def show_end_session(player):
     session_xp = player.cards_correct
     bar = render_progress_bar(
         player.xp,
-        get_next_grade(player.grade.name.name).xp_required
+        get_next_grade(player.grade).xp_required
     ) 
     
     

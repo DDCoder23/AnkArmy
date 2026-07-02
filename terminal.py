@@ -83,7 +83,7 @@ PROGRESSION: {bar}
 
 ------------------------------------
 🪖 STATUT
-Grade: {player.grade.name.name}
+Grade: {player.grade.name}
 Nombre total de mission : {player.total_mission}
 Mission réussie : {player.mission_réussie}
 Pourcentage de réussite : {player.pourcentage_de_réussite}% 

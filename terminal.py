@@ -145,7 +145,7 @@ def show_promo(player, old_grade):
 Félicitations Soldat !
 
 Ancien grade :
-    {old_grade}
+    {old_grade.name}
 
 Nouveau grade :
     {player.grade.name}

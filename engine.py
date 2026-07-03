@@ -70,6 +70,7 @@ class Engine:
         
         
         show_end_session(self.player)
+        save_player(self.player)
         
 
 

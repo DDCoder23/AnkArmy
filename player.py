@@ -18,6 +18,7 @@ class Player:
         self.total_mission=kwargs.get("total_mission",0)
         self.mission_réussie=kwargs.get("mission_réussie",0)
         self.pourcentage_de_réussite=kwargs.get("pourcentage_de_réussite",0)
+        
 
     def add_xp(self, amount):
         self.xp += amount
@@ -56,7 +57,8 @@ class Player:
     
         total_mission=data.get("total des missions", 0),
         mission_réussie=data.get("missions reussies", 0),
-        pourcentage_de_réussite=data.get("pourcentage de reussite",0)
+        pourcentage_de_réussite=data.get("pourcentage de reussite",0),
+        
     ) 
         player.grade = next(
         (g for g in Grades if g.name == data["grade"]),

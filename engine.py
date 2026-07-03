@@ -38,6 +38,8 @@ class Engine:
         print(self.current_mission)
         self.player.total_mission += 1
         self.player.mission_completed = False
+        global current_streak
+        current_streak=0
 
             # 🖥️ affichage
         show_session(self.player, self.current_mission)
@@ -52,6 +54,10 @@ class Engine:
     def review_card(self, correct: bool):
         
         self.player.process_result(correct)
+        if correct:
+            current_streak+=1
+        else:
+            current_streak=0
         self.check_mission_progress()
         save_player(self.player)   # 🔥 IMPORTANT
 
@@ -95,7 +101,7 @@ class Engine:
 
 
         elif mission_type == "streak":
-            if self.player.current_streak >= mission["target"]:
+            if current_streak >= mission["target"]:
                 self.complete_mission()
     def check_end_session_mission(self):
         if self.player.mission_completed:

@@ -5,6 +5,7 @@ def end_session_rewards(player):
     if player.mission_completed and  player.cards_wrong == 0 :
         player.gain_discipline(4)
         player.add_xp(10)
+        player.mission_réussie+=1
     elif player.mission_completed:
         player.gain_discipline(2)
         

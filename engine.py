@@ -80,7 +80,7 @@ class Engine:
 
         if self.player.cards_correct >= mission["target"]:
             self.player.mission_completed = True
-            self.player.mission_réussie+=1
+            
     def accueil (self):
         self.player = load_player()
         print('player loaded')

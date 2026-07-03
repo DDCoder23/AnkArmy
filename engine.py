@@ -63,6 +63,7 @@ class Engine:
             return
         self.session_active = False
         print(self.session_active)
+        self.check_end_session_mission()
         end_session_rewards(self.player)
         old=self.player.grade
         if check_promotion(self.player): 
@@ -73,14 +74,49 @@ class Engine:
         save_player(self.player)
         
 
+    def complete_mission(self):
+        self.player.mission_completed = True
+        self.player.mission_réussie += 1
 
+        print("🎯 Mission accomplie !")
         
     def check_mission_progress(self):
         mission = self.current_mission
 
-        if self.player.cards_correct >= mission["target"]:
-            self.player.mission_completed = True
-            
+   
+        if self.player.mission_completed:
+            return
+
+        mission_type = mission["type"]
+
+        if mission_type == "cards":
+            if self.player.cards_correct >= mission["target"]:
+                self.complete_mission()
+
+
+        elif mission_type == "streak":
+            if self.player.current_streak >= mission["target"]:
+                self.complete_mission()
+    def check_end_session_mission(self):
+        if self.player.mission_completed:
+            return
+
+        mission = self.current_mission
+
+        if mission["type"] == "no_mistake":
+            if self.player.cards_wrong == 0:
+                self.complete_mission()
+
+        elif mission["type"] == "accuracy":
+            total = self.player.cards_correct + self.player.cards_wrong
+
+            if total == 0:
+                return
+
+            accuracy = self.player.cards_correct / total * 100
+
+            if accuracy >= mission["target"]:
+                self.complete_mission()
     def accueil (self):
         self.player = load_player()
         print('player loaded')

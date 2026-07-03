@@ -76,7 +76,7 @@ class Engine:
 
     def complete_mission(self):
         self.player.mission_completed = True
-        self.player.mission_réussie += 1
+        
 
         print("🎯 Mission accomplie !")
         

@@ -8,6 +8,7 @@ def end_session_rewards(player):
         player.mission_réussie+=1
     elif player.mission_completed:
         player.gain_discipline(2)
+        player.mission_réussie+=1
         
     else:
         player.lose_discipline(1)

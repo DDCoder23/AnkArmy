@@ -52,10 +52,13 @@ class Engine:
     
     # CARD RESULT
     def review_card(self, correct: bool):
-        
+        print(f"current_streak : {current_streak}")
         self.player.process_result(correct)
         if correct:
-            current_streak+=1
+            if current_streak.type() is "int":
+                current_streak+=1
+            else:
+                raise ValueError
         else:
             current_streak=0
         self.check_mission_progress()
